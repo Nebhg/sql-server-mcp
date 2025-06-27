@@ -5,12 +5,12 @@
       "sql-server": {
         "command": "python",
         "args": ["-m", "sql_server_mcp.server"],
-        "cwd": "C:\\Users\\benha\\Desktop\\sql-server-mcp",
+        "cwd": "/home/ben/sql-server-mcp",
         "env": {
           "SQL_SERVER_HOST": "192.168.1.117",
           "SQL_SERVER_DATABASE": "EM_Data",
           "SQL_SERVER_USERNAME": "benhg",
-          "SQL_SERVER_PASSWORD": "your_password_here",
+          "SQL_SERVER_PASSWORD": "",
           "SQL_SERVER_PORT": "1433"
         }
       }

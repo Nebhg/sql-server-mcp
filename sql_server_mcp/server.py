@@ -345,6 +345,8 @@ class SQLServerMCP:
                         "query": query
                     }
                 else:
+                    # Commit the transaction for non-SELECT queries
+                    conn.commit()
                     return {
                         "success": True,
                         "message": f"Query executed successfully. Rows affected: {result.rowcount}",
@@ -695,9 +697,8 @@ async def main():
             InitializationOptions(
                 server_name="sql-server-mcp",
                 server_version="1.0.0",
-                capabilities=mcp_server.server.get_capabilities(
-                    notification_options=None,
-                    experimental_capabilities={}
+                capabilities=types.ServerCapabilities(
+                    tools=types.ToolsCapability(listChanged=True)
                 )
             )
         )
