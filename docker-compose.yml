@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  sql-server-mcp:
+    build: .
+    environment:
+      - SQL_SERVER_HOST=${SQL_SERVER_HOST:-192.168.1.117}
+      - SQL_SERVER_DATABASE=${SQL_SERVER_DATABASE:-EM_Data}
+      - SQL_SERVER_USERNAME=${SQL_SERVER_USERNAME:-benhg}
+      - SQL_SERVER_PASSWORD=${SQL_SERVER_PASSWORD}
+      - SQL_SERVER_PORT=${SQL_SERVER_PORT:-1433}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    volumes:
+      - ./sql_server_mcp:/app/sql_server_mcp
+    stdin_open: true
+    tty: true
+    networks:
+      - mcp-network
+
+  # Optional: SQL Server for testing
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourStrongPassword123!
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - mcp-network
+
+volumes:
+  sqlserver_data:
+
+networks:
+  mcp-network:
+    driver: bridge

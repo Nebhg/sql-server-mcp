@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sql-server-mcp"
+version = "1.0.0"
+description = "SQL Server MCP Server for database operations"
+authors = [{name = "Ben", email = "ben@example.com"}]
+requires-python = ">=3.9"
+dependencies = [
+    "mcp>=1.0.0",
+    "sqlalchemy>=2.0.0",
+    "pyodbc>=5.0.0",
+    "pandas>=2.0.0",
+    "python-dotenv>=1.0.0"
+]
+
+[project.scripts]
+sql-server-mcp = "sql_server_mcp.server:main"
